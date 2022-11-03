@@ -4,7 +4,7 @@ pipeline {
 			stage('Checkout Git'){
 			steps {
 				echo 'Pulling...';
-				git branch : 'rania,
+				git branch:'rania,
 				url : 'https://github.com/hajerhassine/ProjetDevOps.git';
 				}
 			}
