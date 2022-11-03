@@ -1,13 +1,18 @@
 pipeline {
 	agent any 
 	stages{
-			stages('Checkout Git'){
+			stage('Checkout Git'){
 			steps {
 				echo 'Pulling...';
 				git branch : 'rania,
 				url : 'https://github.com/hajerhassine/ProjetDevOps.git';
 				}
 			}
+			stage('Testing maven'){
+				steps {
+					sh """mvn --version """
+					}
+			}		
 		}
 }		
 		
