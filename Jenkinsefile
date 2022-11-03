@@ -1,0 +1,16 @@
+pipeline {
+	agent any 
+	stages{
+			stages('Checkout Git'){
+			steps {
+				echo 'Pulling...';
+				git branch : 'rania,
+				url : 'https://github.com/hajerhassine/ProjetDevOps.git';
+				}
+			}
+		}
+}		
+		
+		
+				
+	
