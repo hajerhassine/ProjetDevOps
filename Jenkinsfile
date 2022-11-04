@@ -26,7 +26,7 @@ pipeline {
         }
         stage('MVN SONARQUBE analysis 1'){
             steps {
-                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.paswword=sonar'
+                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar'
             }
         }
     }
