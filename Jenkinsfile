@@ -18,21 +18,25 @@ pipeline {
             }
         }
        
-        stage('MVN CLEAN') {
+        stage('Mvn Clean') {
             steps {
                 sh 'mvn clean'
                  
             }
         }
-        stage('MVN COMPILE') {
+        stage('Mvn Compile') {
             steps {
                 sh 'mvn compile'
                  
             }
         }
         
-      
+        stage('SonarQube analysis 1') {
+            steps {
+                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=Donia123456789'
+            }
+        }
+       
         
     }
 }
-

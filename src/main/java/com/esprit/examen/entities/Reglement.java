@@ -1,5 +1,6 @@
 package com.esprit.examen.entities;
 
+
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -18,8 +19,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class Reglement implements Serializable{
 	private static final long serialVersionUID = 1L;
 
@@ -73,12 +73,21 @@ public class Reglement implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	@Override
-	public String toString() {
-		return "Reglement [idReglement=" + idReglement + ", montantPaye=" + montantPaye + ", montantRestant="
-				+ montantRestant + ", payee=" + payee + ", dateReglement=" + dateReglement + ", facture=" + facture
-				+ "]";
+	public Reglement(Long idReglement, float montantPaye, float montantRestant, Boolean payee, Date dateReglement,
+			Facture facture) {
+		super();
+		this.idReglement = idReglement;
+		this.montantPaye = montantPaye;
+		this.montantRestant = montantRestant;
+		this.payee = payee;
+		this.dateReglement = dateReglement;
+		this.facture = facture;
 	}
+	public Reglement() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 
 	
 }

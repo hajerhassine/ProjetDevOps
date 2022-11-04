@@ -20,8 +20,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class Facture implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -99,6 +98,24 @@ public class Facture implements Serializable {
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	public Facture(Long idFacture, float montantRemise, float montantFacture, Date dateCreationFacture,
+			Date dateDerniereModificationFacture, Boolean archivee, Set<DetailFacture> detailsFacture,
+			Fournisseur fournisseur, Set<Reglement> reglements) {
+		super();
+		this.idFacture = idFacture;
+		this.montantRemise = montantRemise;
+		this.montantFacture = montantFacture;
+		this.dateCreationFacture = dateCreationFacture;
+		this.dateDerniereModificationFacture = dateDerniereModificationFacture;
+		this.archivee = archivee;
+		this.detailsFacture = detailsFacture;
+		this.fournisseur = fournisseur;
+		this.reglements = reglements;
+	}
+	public Facture() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	
