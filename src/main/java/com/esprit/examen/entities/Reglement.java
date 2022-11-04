@@ -79,19 +79,6 @@ public class Reglement implements Serializable{
 				+ montantRestant + ", payee=" + payee + ", dateReglement=" + dateReglement + ", facture=" + facture
 				+ "]";
 	}
-	public Reglement(Long idReglement, float montantPaye, float montantRestant, Boolean payee, Date dateReglement,
-			Facture facture) {
-		super();
-		this.idReglement = idReglement;
-		this.montantPaye = montantPaye;
-		this.montantRestant = montantRestant;
-		this.payee = payee;
-		this.dateReglement = dateReglement;
-		this.facture = facture;
-	}
-	public Reglement() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+
 	
 }
