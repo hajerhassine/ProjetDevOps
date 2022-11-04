@@ -15,8 +15,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class DetailFacture implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -87,5 +86,6 @@ public class DetailFacture implements Serializable {
 		this.produit = produit;
 		this.facture = facture;
 	}
+
 
 }
