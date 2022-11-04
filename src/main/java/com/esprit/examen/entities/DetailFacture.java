@@ -76,5 +76,16 @@ public class DetailFacture implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	public DetailFacture(Long idDetailFacture, Integer qteCommandee, float prixTotalDetail, Integer pourcentageRemise,
+			float montantRemise, Produit produit, Facture facture) {
+		super();
+		this.idDetailFacture = idDetailFacture;
+		this.qteCommandee = qteCommandee;
+		this.prixTotalDetail = prixTotalDetail;
+		this.pourcentageRemise = pourcentageRemise;
+		this.montantRemise = montantRemise;
+		this.produit = produit;
+		this.facture = facture;
+	}
 
 }

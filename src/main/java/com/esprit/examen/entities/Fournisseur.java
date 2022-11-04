@@ -88,6 +88,17 @@ public class Fournisseur implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	public Fournisseur(Long idFournisseur, String code, String libelle, CategorieFournisseur categorieFournisseur,
+			Set<Facture> factures, Set<SecteurActivite> secteurActivites, DetailFournisseur detailFournisseur) {
+		super();
+		this.idFournisseur = idFournisseur;
+		this.code = code;
+		this.libelle = libelle;
+		this.categorieFournisseur = categorieFournisseur;
+		this.factures = factures;
+		this.secteurActivites = secteurActivites;
+		this.detailFournisseur = detailFournisseur;
+	}
     
 
 	

@@ -36,7 +36,12 @@ pipeline {
                 sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=Admin123456789'
             }
         }
-       
+       stage ('Test'){
+            steps {
+                echo 'Testing... ';
+                sh 'mvn test -Dtest="FactureServiceImplTest"';
+            }
+        }
         
     }
 }
