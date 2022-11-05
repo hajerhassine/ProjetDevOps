@@ -33,6 +33,7 @@ public class FournisseurServiceImplTest {
 	FournisseurRepository entrepriseRepoistory;
 	
 	
+
 	
 	//@Test
 	//public void testretrieveAllFournisseurs() throws ParseException {
@@ -56,6 +57,7 @@ public class FournisseurServiceImplTest {
 		List<Fournisseur> fournisseurs =fournisseurservice.retrieveAllFournisseurs();
 		for(int i=0 ; i<fournisseurs.size(); i++){
 			//l.info(fournisseurs);
+			
 			
 		}
 		Assert.notNull(fournisseurs,"contrat was null");
