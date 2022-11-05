@@ -42,7 +42,7 @@ pipeline {
         }
         stage('MVN SONARQUBE analysis 1'){
             steps {
-                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar'
+                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=lassoued'
             }
         }
     	stage('NEXUS') {
