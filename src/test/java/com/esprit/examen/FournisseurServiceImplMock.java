@@ -1,31 +1,27 @@
 package com.esprit.examen;
 
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.times;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-
-
-
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
 
 
 
@@ -37,7 +33,7 @@ import com.esprit.examen.services.FournisseurServiceImpl;
 
 
 
-@SpringBootTest(classes=FournisseurServiceImplMock.class)
+
 @ExtendWith(MockitoExtension.class)
 public class FournisseurServiceImplMock {
 	//private static final Logger l = LogManager.getLogger(FournisseurServiceImpl.class);
@@ -48,9 +44,6 @@ public class FournisseurServiceImplMock {
 	    @InjectMocks
 	    FournisseurServiceImpl fournisseurServiceImpl;
 
-	
-
-	
 	    Fournisseur fournisseur = new Fournisseur(1L, "code1", "libelle1", CategorieFournisseur.CONVENTIONNE, null, null, null);
 
 	    List<Fournisseur> listFournisseurs = new ArrayList<Fournisseur>() {
@@ -63,12 +56,13 @@ public class FournisseurServiceImplMock {
 	    @Test
 	    public void testretrieveFournisseur(){
 
-
 	        Mockito.when(fournisseurRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(fournisseur));
 	        
-			
 	        Assertions.assertNotNull(fournisseurServiceImpl.retrieveFournisseur(2L));
 	    }
+	    
+	    //Test
+	    
 	    @Test
 	    public void testaddFournisseur(){
 
@@ -86,8 +80,6 @@ public class FournisseurServiceImplMock {
 
 	        assertEquals(null, fournisseurServiceImpl.retrieveFournisseur(3L));
 	    }
-	    
-
 
 	 
 }
