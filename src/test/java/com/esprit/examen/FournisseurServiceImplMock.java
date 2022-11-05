@@ -3,6 +3,8 @@ package com.esprit.examen;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.times;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +37,9 @@ import com.esprit.examen.services.FournisseurServiceImpl;
 
 
 
-@SpringBootTest(classes=FournisseurServiceImplTest.class)
+@SpringBootTest(classes=FournisseurServiceImplMock.class)
 @ExtendWith(MockitoExtension.class)
-public class FournisseurServiceImplTest {
+public class FournisseurServiceImplMock {
 	//private static final Logger l = LogManager.getLogger(FournisseurServiceImpl.class);
 
 	 @Mock
@@ -66,6 +68,23 @@ public class FournisseurServiceImplTest {
 	        
 			
 	        Assertions.assertNotNull(fournisseurServiceImpl.retrieveFournisseur(2L));
+	    }
+	    @Test
+	    public void testaddFournisseur(){
+
+	        Mockito.when(fournisseurRepository.save(fournisseur)).thenReturn(fournisseur);
+
+	        Assertions.assertNotNull(fournisseurServiceImpl.addFournisseur(fournisseur));
+	    }
+
+	    @Test
+	    public void testdeleteFournisseur(){
+
+	        fournisseurServiceImpl.deleteFournisseur(3L);
+
+	        Mockito.verify(fournisseurRepository, times(1)).deleteById(3L);
+
+	        assertEquals(null, fournisseurServiceImpl.retrieveFournisseur(3L));
 	    }
 	    
 
