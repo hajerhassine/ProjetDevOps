@@ -20,8 +20,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class Produit implements Serializable {
 
 	/**
@@ -100,6 +99,23 @@ public class Produit implements Serializable {
 	}
 	public void setCategorieProduit(CategorieProduit categorieProduit) {
 		this.categorieProduit = categorieProduit;
+	}
+	public Produit(Long idProduit, String codeProduit, String libelleProduit, float prix, Date dateCreation,
+			Date dateDerniereModification, Stock stock, Set<DetailFacture> detailFacture,
+			CategorieProduit categorieProduit) {
+		super();
+		this.idProduit = idProduit;
+		this.codeProduit = codeProduit;
+		this.libelleProduit = libelleProduit;
+		this.prix = prix;
+		this.dateCreation = dateCreation;
+		this.dateDerniereModification = dateDerniereModification;
+		this.stock = stock;
+		this.detailFacture = detailFacture;
+		this.categorieProduit = categorieProduit;
+	}
+	public Produit(long l, Object object, Object object2, Object object3, Object object4, Object object5, Object object6, Object object7, Object object8, Object object9) {
+		super();
 	}
 	
 
