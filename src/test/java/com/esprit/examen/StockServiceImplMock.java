@@ -22,7 +22,7 @@ import com.esprit.examen.entities.Stock;
 import com.esprit.examen.repositories.StockRepository;
 import com.esprit.examen.services.StockServiceImpl;
 
-@SpringBootTest(classes=StockServiceImplMock.class)
+
 @ExtendWith(MockitoExtension.class)
 public class StockServiceImplMock {
 	
