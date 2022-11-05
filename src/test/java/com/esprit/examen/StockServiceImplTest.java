@@ -12,7 +12,8 @@ import java.util.List;
 import com.esprit.examen.entities.Stock;
 import com.esprit.examen.services.IStockService;
 
-@SpringBootTest(classes=StockServiceImplTest.class)
+
+@SpringBootTest
 public class StockServiceImplTest {
 	
 	@Autowired
