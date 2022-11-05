@@ -1,18 +1,13 @@
 package com.esprit.examen;
 
-
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.times;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -21,8 +16,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
-
 
 
 import com.esprit.examen.entities.CategorieFournisseur;
@@ -44,44 +37,49 @@ public class FournisseurServiceImplMock {
 	    @InjectMocks
 	    FournisseurServiceImpl fournisseurServiceImpl;
 
-	    Fournisseur fournisseur = new Fournisseur(1L, "code1", "libelle1", CategorieFournisseur.CONVENTIONNE, null, null, null);
-
-	    List<Fournisseur> listFournisseurs = new ArrayList<Fournisseur>() {
-	        {
-	            add(new Fournisseur(2L, "code2", "libelle2", CategorieFournisseur.CONVENTIONNE, null, null, null));
-	            add(new Fournisseur(3L, "code3", "libelle3", CategorieFournisseur.ORDINAIRE, null, null, null));
-	        }
-	    };
-
-	    @Test
-	    public void testretrieveFournisseur(){
-
-	        Mockito.when(fournisseurRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(fournisseur));
-	        
-	        Assertions.assertNotNull(fournisseurServiceImpl.retrieveFournisseur(2L));
-	    }
-	    
-	    //Test
-	    
-	    @Test
-	    public void testaddFournisseur(){
-
-	        Mockito.when(fournisseurRepository.save(fournisseur)).thenReturn(fournisseur);
-
-	        Assertions.assertNotNull(fournisseurServiceImpl.addFournisseur(fournisseur));
-	    }
-
-	    @Test
-	    public void testdeleteFournisseur(){
-
-	        fournisseurServiceImpl.deleteFournisseur(3L);
-
-	        Mockito.verify(fournisseurRepository, times(1)).deleteById(3L);
-
-	        assertEquals(null, fournisseurServiceImpl.retrieveFournisseur(3L));
-	    }
-
 	 
+
+	  //  @Test
+	   // public void retrieveAllFournisseurTest() {
+	   // when(fournisseurRepository.findAll()).thenReturn(Stream.of(
+	    		 
+         //       new Fournisseur("libelle2", "20"),
+         //       new Fournisseur("libelle3", "30")
+          //      .collect(Collectors.toList()));
+	//	assertEquals(3,fournisseurServiceImpl.retrieveAllFournisseurs().size());
+		
+
+	   // }
+	    @Test
+	    public void addFournisseurTest() {
+	    	Fournisseur ss = new Fournisseur("libelle2", "20");
+	    when(fournisseurRepository.save(ss)).thenReturn(ss);
+	    assertEquals(ss, fournisseurServiceImpl.addFournisseur(ss));
+	    }
+	       
+	       
+	        @Test
+	    public void deleteFournisseurTest() {
+	        	Fournisseur ss = new Fournisseur("libelle2", "20");
+	        	fournisseurServiceImpl.deleteFournisseur((long) 1);
+	    verify(fournisseurRepository).deleteById((long) 1);
+
+	    }
+	       
+	        @Test
+	    public void updatetFournisseurTest() {
+	        	Fournisseur ss = new Fournisseur("libelle2", "20") ;
+	    Mockito.when(fournisseurRepository.save(Mockito.any(Fournisseur.class))).thenReturn(ss);
+	    ss.setLibelle("mohamed");;
+	    Fournisseur exisitingOp= fournisseurServiceImpl.updateFournisseur(ss) ;
+
+	    assertNotNull(exisitingOp);
+	    assertEquals("mohamed", ss.getLibelle());
+	    }
+	       
+	       
+	       
+
 }
 
 
