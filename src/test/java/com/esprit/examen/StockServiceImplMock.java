@@ -72,7 +72,7 @@ public class StockServiceImplMock {
 	public void updatetStockTest() {
     	Stock ss = new Stock("libelleStock2", 20, 5) ;
 		Mockito.when(stockRepository.save(Mockito.any(Stock.class))).thenReturn(ss);
-		ss.setLibelleStock("mohamed");;
+		ss.setLibelleStock("mohamed");
 		Stock exisitingOp= stockService.updateStock(ss) ;
 		
 		assertNotNull(exisitingOp);
