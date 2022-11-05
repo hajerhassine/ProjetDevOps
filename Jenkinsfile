@@ -25,9 +25,15 @@ pipeline {
             }
         }
         //stage('MVN SONARQUBE analysis 1'){
-         //   steps {
-          //      sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=test'
-          //  }
+          //  steps {
+           //     sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=test'
+           // }
+       // }
+            stage ('Test'){
+            steps {
+                echo 'Testing ...';
+                sh 'mvn test -Dtest="FournisseurServiceImplTest"'
+            }
         }
        
     }
