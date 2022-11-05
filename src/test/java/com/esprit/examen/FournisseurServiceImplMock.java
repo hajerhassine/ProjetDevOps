@@ -66,16 +66,16 @@ public class FournisseurServiceImplMock {
 
 	    }
 	       
-	        @Test
-	    public void updatetFournisseurTest() {
-	        	Fournisseur ss = new Fournisseur("libelle2", "20") ;
-	    Mockito.when(fournisseurRepository.save(Mockito.any(Fournisseur.class))).thenReturn(ss);
-	    ss.setLibelle("mohamed");;
-	    Fournisseur exisitingOp= fournisseurServiceImpl.updateFournisseur(ss) ;
+	 //       @Test
+	   // public void updatetFournisseurTest() {
+	    //    	Fournisseur ss = new Fournisseur("libelle2", "20") ;
+	    //Mockito.when(fournisseurRepository.save(Mockito.any(Fournisseur.class))).thenReturn(ss);
+	   // ss.setLibelle("mohamed");;
+	   // Fournisseur exisitingOp= fournisseurServiceImpl.updateFournisseur(ss) ;
 
-	    assertNotNull(exisitingOp);
-	    assertEquals("mohamed", ss.getLibelle());
-	    }
+	    //assertNotNull(exisitingOp);
+	   // assertEquals("mohamed", ss.getLibelle());
+	   // }
 	       
 	       
 	       
