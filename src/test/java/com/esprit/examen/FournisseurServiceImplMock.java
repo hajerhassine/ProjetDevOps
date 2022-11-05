@@ -60,6 +60,7 @@ public class FournisseurServiceImplMock {
 	    assertEquals(ss, fournisseurServiceImpl.addFournisseur(ss));
 	    }
 	       
+	    
 	       
 	        @Test
 	    public void deleteFournisseurTest() {
