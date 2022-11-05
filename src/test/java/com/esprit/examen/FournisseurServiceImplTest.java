@@ -1,4 +1,4 @@
-package com.esprit.examen.services;
+package com.esprit.examen;
 
 
 import org.junit.Test;
@@ -21,11 +21,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.esprit.examen.entities.CategorieFournisseur;
 import com.esprit.examen.entities.Fournisseur;
 import com.esprit.examen.repositories.FournisseurRepository;
+import com.esprit.examen.services.IFournisseurService;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.times;
 
-
-@SpringBootTest
+@SpringBootTest(classes=FournisseurServiceImplTest.class)
 @ExtendWith(MockitoExtension.class)
 public class FournisseurServiceImplTest {
 	//private static final Logger l = LogManager.getLogger(FournisseurServiceImpl.class);
