@@ -1,42 +1,73 @@
 package com.esprit.examen.services;
 
-import static org.junit.Assert.assertEquals;
-
-import com.esprit.examen.entities.DetailFacture;
-import com.esprit.examen.entities.Facture;
-import com.esprit.examen.entities.Fournisseur;
-import com.esprit.examen.entities.Operateur;
-import com.esprit.examen.repositories.DetailFactureRepository;
-import com.esprit.examen.repositories.FactureRepository;
-import com.esprit.examen.repositories.FournisseurRepository;
-import com.esprit.examen.repositories.OperateurRepository;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.time.*;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.esprit.examen.entities.Facture;
 
 @SpringBootTest
-@TestMethodOrder(org.junit.jupiter.api.MethodOrderer.OrderAnnotation.class)
-@ExtendWith(MockitoExtension.class)
-class FactureServiceImplTest {
+public class FactureServiceImplTest {
+	@Autowired
+	IFactureService factureService;
+
+	//testing Add method
+	@Test
+	public void testAddFacture(){
+	List<Facture> factures = factureService.retrieveAllFactures();
+	int expected = factures.size();
+	Facture o = new Facture();
+	o.setMontantFacture((float) 12.5);
+	o.setMontantRemise((float) 12.3);
+	Date m = new Date(2014,02,11);
+	o.setDateCreationFacture(m);
+	o.setDateDerniereModificationFacture(m);
+	Facture savedOperateur= factureService.addFacture(o);
+	assertEquals(expected+1, factureService.retrieveAllFactures().size());
+	assertNotNull(savedOperateur.getMontantFacture());
+	factureService.cancelFacture(savedOperateur.getIdFacture());}
+	
+	@Test
+	public void testRetrieveFactures() {
+	Facture o = new Facture();
+	o.setMontantFacture((float) 12.5);
+	o.setMontantRemise((float) 12.3);
+	Date m = new Date(2014,02,11);
+	o.setDateCreationFacture(m);
+	o.setDateDerniereModificationFacture(m);
+	Facture savedOperateur= factureService.addFacture(o);
+	Facture getOperateur= factureService.retrieveFacture(savedOperateur.getIdFacture());
+	assertNotNull(savedOperateur.getMontantFacture());
+	assertNotNull(savedOperateur.getMontantRemise());
+	assertNotNull(savedOperateur.getDateCreationFacture());
+	assertNotNull(savedOperateur.getDateDerniereModificationFacture());
+	assertEquals(savedOperateur.getIdFacture(),getOperateur.getIdFacture());
+
+	factureService.cancelFacture(savedOperateur.getIdFacture());
+	}
 
 
-  
 
-}
+
+	//Testing deleteOperateur
+	@Test
+	public void testDeleteFacture() {
+		Facture o = new Facture();
+		o.setMontantFacture((float) 12.5);
+		o.setMontantRemise((float) 12.3);
+		Date m = new Date(2014,02,11);
+		o.setDateCreationFacture(m);
+		o.setDateDerniereModificationFacture(m);
+		Facture savedOperateur= factureService.addFacture(o);
+	factureService.cancelFacture(savedOperateur.getIdFacture());
+	assertNotNull(savedOperateur.getIdFacture());
+
+	}
+	}
