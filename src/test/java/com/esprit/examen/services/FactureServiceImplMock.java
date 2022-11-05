@@ -36,11 +36,11 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class FactureServiceImplMock {
 
-
+	@Mock
+	   private FactureRepository factureRepository;
     @InjectMocks
     FactureServiceImpl factureService;
-    @Mock
-   private FactureRepository factureRepository;
+    
 
     @Mock
     OperateurRepository operateurRepository;
