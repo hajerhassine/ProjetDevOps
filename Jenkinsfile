@@ -24,7 +24,7 @@ pipeline {
                 sh 'mvn compile'
             }
         }
-        
+
          stage ('JUnit and Mockito Test'){
             steps{
                 script
@@ -40,7 +40,8 @@ pipeline {
                 }
             }
         }
-        stage('MVN SONARQUBE analysis 1'){
+
+        stage('MVN SONARQUBE'){
             steps {
                 sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar'
             }
