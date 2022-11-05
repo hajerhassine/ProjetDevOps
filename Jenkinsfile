@@ -24,15 +24,16 @@ pipeline {
                 sh 'mvn compile'
             }
         }
-        stage('MVN SONARQUBE analysis 1'){
-            steps {
-                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar'
-            }
-        }
         stage ('Test'){
             steps {
                 echo 'Testing ...';
                 sh 'mvn test -Dtest="ProduitServiceImplTest"'
+            }
+        }
+
+        stage('MVN SONARQUBE analysis 1'){
+            steps {
+                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=lassoued'
             }
         }
     }
