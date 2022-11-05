@@ -30,7 +30,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.esprit.examen.entities.CategorieFournisseur;
 import com.esprit.examen.entities.Fournisseur;
 import com.esprit.examen.repositories.FournisseurRepository;
-import com.esprit.examen.services.IFournisseurService;
+import com.esprit.examen.services.FournisseurServiceImpl;
+
 
 
 
@@ -43,7 +44,7 @@ public class FournisseurServiceImplTest {
 	 FournisseurRepository fournisseurRepository;
 
 	    @InjectMocks
-	    IFournisseurService fournisseurServiceImpl;
+	    FournisseurServiceImpl fournisseurServiceImpl;
 
 	
 
