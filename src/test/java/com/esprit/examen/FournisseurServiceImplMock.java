@@ -31,6 +31,7 @@ import com.esprit.examen.services.FournisseurServiceImpl;
 public class FournisseurServiceImplMock {
 	//private static final Logger l = LogManager.getLogger(FournisseurServiceImpl.class);
 
+	
 	 @Mock
 	 FournisseurRepository fournisseurRepository;
 
