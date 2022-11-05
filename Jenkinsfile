@@ -24,11 +24,7 @@ pipeline {
                 sh 'mvn compile'
             }
         }
-        stage('MVN SONARQUBE analysis 1'){
-            steps {
-                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=test'
-            }
-        }
+       
            stage('JUnit and Mockito Test'){
             steps{
                 script
@@ -46,4 +42,10 @@ pipeline {
         }
        
     }
+    
+     stage('MVN SONARQUBE analysis 1'){
+            steps {
+                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=test'
+            }
+        }
 }
