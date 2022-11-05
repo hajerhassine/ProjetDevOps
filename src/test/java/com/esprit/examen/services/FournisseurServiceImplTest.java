@@ -64,8 +64,10 @@ public class FournisseurServiceImplTest {
 	    @Test
 	    public void testretrieveFournisseur(){
 
+
 	        Mockito.when(fournisseurRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(fournisseur));
 	        
+			
 	        Assertions.assertNotNull(fournisseurServiceImpl.retrieveFournisseur(2L));
 	    }
 	    
