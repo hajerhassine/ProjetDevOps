@@ -2,6 +2,11 @@ package com.esprit.examen;
 
 import java.util.List;
 import java.util.Optional;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
+
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Assertions;
@@ -29,6 +34,7 @@ public class StockServiceImplMock {
     
     
     Stock stock = new Stock("libelleStock1", 10, 3);
+    
     List<Stock> listStocks = new ArrayList<Stock>() {
         {
             add(new Stock("libelleStock2", 20, 5));
@@ -53,6 +59,27 @@ public class StockServiceImplMock {
         List<Stock> list = StI.retrieveAllStocks();
         Assertions.assertNotNull(list);
     }
+    
+    @Test
+	public void testaddStock() {
+		Mockito.when(stockRepository.save(Mockito.any(Stock.class))).thenReturn(stock);
+		assertNotNull(StI.addStock(stock));
+		//verify(stockRepository).save(s);
+	}
+    
+    @Test
+	public void testUpdateStock() {
+		Mockito.when(stockRepository.save(Mockito.any(Stock.class))).thenReturn(stock);
+		stock.setQte(55);
+		assertNotNull(StI.updateStock(stock));	
+		assertEquals(55, stock.getQte());
+	}
+    
+    @Test
+	public void testDeleteStock() {
+    	StI.deleteStock((long)3);
+		verify(stockRepository).deleteById((long)3);
+	}
     
     
 

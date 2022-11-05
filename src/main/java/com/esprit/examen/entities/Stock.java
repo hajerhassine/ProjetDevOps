@@ -26,6 +26,10 @@ public class Stock implements Serializable {
 	@OneToMany(mappedBy = "stock")
 	@JsonIgnore
 	private Set<Produit> produits;
+	
+	public Stock() {
+		super();
+	}
 	public Stock(String libelleStock, Integer qte, Integer qteMin) {
 		super();
 		this.libelleStock = libelleStock;
