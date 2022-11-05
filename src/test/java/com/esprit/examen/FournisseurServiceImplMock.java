@@ -35,6 +35,7 @@ public class FournisseurServiceImplMock {
 	 @Mock
 	 FournisseurRepository fournisseurRepository;
 
+	 
 	    @InjectMocks
 	    FournisseurServiceImpl fournisseurServiceImpl;
 
