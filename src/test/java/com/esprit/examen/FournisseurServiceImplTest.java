@@ -1,21 +1,30 @@
 package com.esprit.examen;
 
 
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.extension.ExtendWith;
-
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.util.ArrayList;
-
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+
+
+
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+
 
 
 import com.esprit.examen.entities.CategorieFournisseur;
@@ -23,8 +32,7 @@ import com.esprit.examen.entities.Fournisseur;
 import com.esprit.examen.repositories.FournisseurRepository;
 import com.esprit.examen.services.IFournisseurService;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.times;
+
 
 @SpringBootTest(classes=FournisseurServiceImplTest.class)
 @ExtendWith(MockitoExtension.class)
@@ -38,20 +46,7 @@ public class FournisseurServiceImplTest {
 	    IFournisseurService fournisseurServiceImpl;
 
 	
-	//@Test
-	//public void testretrieveAllFournisseurs() throws ParseException {
-	// dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-	//	Date dateNaissance = dateFormat.parse("30/09/2000");
-		//List<Fournisseur> fournisseurs = fournisseurservice.retrieveAllFournisseurs();
-		//int expected = fournisseurs.size();
-		//Fournisseur f = new Fournisseur("code", "libelle", dateNaissance, "ahmed.salhi@esprit.tn", "pwd", Profession.Cadre,
-		//		categorieFournisseur.Ordinaire);
-		//Fournisseur fournisseur = fournisseurservice.addFournisseur(f);
-		//assertEquals(expected + 1, fournisseurservice.retrieveAllFournisseurs().size());
-		//fournisseurservice.deleteFournisseur(fournisseur.getIdFournisseur());
 
-	//}
-	
 	
 	    Fournisseur fournisseur = new Fournisseur(1L, "code1", "libelle1", CategorieFournisseur.CONVENTIONNE, null, null, null);
 
@@ -72,26 +67,9 @@ public class FournisseurServiceImplTest {
 	        Assertions.assertNotNull(fournisseurServiceImpl.retrieveFournisseur(2L));
 	    }
 	    
-	    //Test
-	    
-	    @Test
-	    public void testaddFournisseur(){
 
-	        Mockito.when(fournisseurRepository.save(fournisseur)).thenReturn(fournisseur);
 
-	        Assertions.assertNotNull(fournisseurServiceImpl.addFournisseur(fournisseur));
-	    }
-
-	    @Test
-	    public void testdeleteFournisseur(){
-
-	        fournisseurServiceImpl.deleteFournisseur(3L);
-
-	        Mockito.verify(fournisseurRepository, times(1)).deleteById(3L);
-
-	        assertEquals(null, fournisseurServiceImpl.retrieveFournisseur(3L));
-	    }
-	
+	 
 }
 
 
