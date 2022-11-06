@@ -8,6 +8,36 @@ pipeline {
               url : 'https://github.com/hajerhassine/ProjetDevOps.git'
          }    
         }
+
+        stage('Building image docker-compose') {
+          steps {
+
+              sh "docker-compose up -d"
+          }
+        }
+
+         stage('Build image') {
+          steps {
+            sh "docker build -t raniamilouchi/imagedevops ."
+       		}
+       		}
+    		
+ 	   stage('Push image') {
+ 		steps {
+ 	       withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
+ 			
+        	 sh "docker push raniamilouchi/imagedevops"
+        	}
+        	}
+        	}
+         stage('Cleaning up') {
+ 		steps {
+ 	       withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
+ 			
+        	 sh "docker rmi -f raniamilouchi/imagedevops"
+        	}
+        	}
+        	}
        
 
         stage('Testing maven'){
@@ -51,6 +81,14 @@ pipeline {
                 }
             }
         }
+
+        stage('Nexus'){
+            steps{
+                sh 'mvn deploy '
+            }
+        }
+
+      
 
 
      
