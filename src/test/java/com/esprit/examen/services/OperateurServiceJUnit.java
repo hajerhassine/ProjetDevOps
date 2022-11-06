@@ -1,95 +1,80 @@
-//package com.esprit.examen.services;
-//
-//
-//import com.esprit.examen.entities.Operateur;
-//import com.esprit.examen.service.OperateurService;
-//import org.junit.jupiter.api.MethodOrderer;
-//import org.junit.jupiter.api.TestMethodOrder;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.context.SpringBootTest;
-//import org.junit.jupiter.api.*;
-//
-//import java.util.List;
-//
-//@SpringBootTest
-//@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-//public class OperateurServiceJUnit {
-//
-//
-//    @Autowired
-//    OperateurService os;
-//    @Test
-//    @Order(2)
-//     void testretrieveAllOperateurs(){
-//       int listOperateur = os.retrieveAllOperateurs().size();
-//        List<Operateur> listOperateurs = os.retrieveAllOperateurs();
-//        Assertions.assertEquals(listOperateur,listOperateurs.size());
-//    }
-//
-//    @Test
-//    @Order(3)
-//     void testretrieveOperateur(){
-//       Operateur op = os.addOperateur(Operateur.builder()
-//               .nom("Hamdi")
-//               .prenom("Wedi")
-//               .password("root")
-//               .build());
-//        Assertions.assertEquals(op.getIdOperateur() , os.retrieveOperateur(op.getIdOperateur()).getIdOperateur()) ;
-//    }
-//
-//
-//
-//    @Test
-//    @Order(1)
-//     void testaddOperateur(){
-//        Operateur op = os.addOperateur(Operateur.builder()
-//                .nom("Trifi")
-//                .prenom("Eya")
-//                .password("root")
-//                .build());
-//        Assertions.assertNotNull(op);
-//
-//
-//    }
-//
-//    @Test
-//    @Order(5)
-//     void testdeleteOperateur(){
-//       Operateur op = os.addOperateur(Operateur.builder()
-//               .nom("Maria")
-//               .prenom("Trifi")
-//               .password("root")
-//               .build());
-//        os.deleteOperateur(op.getIdOperateur());
-//        //Assertions.assertEquals(- 1,os.retrieveAllOperateurs().size());
-//        Assertions.assertNull(os.retrieveOperateur(op.getIdOperateur()));
-//
-//    }
-//
-//    @Test
-//    @Order(4)
-//     void tesupdateOperateur(){
-//       Operateur op = os.addOperateur(Operateur.builder()
-//               .nom("Noura")
-//               .prenom("Trifi")
-//               .password("root")
-//               .build());
-//        op.setPrenom("Nounou");
-//        os.updateOperateur(op);
-//        Assertions.assertEquals("Nounou", os.updateOperateur(op).getPrenom());
-//
-//    }
-//
-//}
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+package com.esprit.examen.services;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.util.List;
+
+import com.esprit.examen.service.OperateurService;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.esprit.examen.entities.Operateur;
+
+
+@SpringBootTest
+public class OperateurServiceJUnit {
+
+    @Autowired
+    OperateurService operateurService;
+
+    //testing Add method
+    @Test
+    public void testAddOperateur(){
+        List<Operateur> operateurs = operateurService.retrieveAllOperateurs();
+        int expected = operateurs.size();
+        Operateur o = new Operateur();
+        o.setNom("Yass");
+        o.setPrenom("Manita");
+        o.setPassword("passwd");
+        Operateur savedOperateur= operateurService.addOperateur(o);
+        assertEquals(expected+1, operateurService.retrieveAllOperateurs().size());
+        assertNotNull(savedOperateur.getNom());
+        operateurService.deleteOperateur(savedOperateur.getIdOperateur());
+
+    }
+
+    //Testing retrieveOperateur
+    @Test
+    public void testRetrieveOperateurs() {
+        Operateur o = new Operateur();
+        o.setNom("yas");
+        o.setPrenom("mine");
+        o.setPassword("pass");
+        Operateur savedOperateur= operateurService.addOperateur(o);
+        Operateur getOperateur= operateurService.retrieveOperateur(savedOperateur.getIdOperateur());
+        assertNotNull(savedOperateur.getNom());
+        assertNotNull(savedOperateur.getPrenom());
+        assertEquals(savedOperateur.getIdOperateur(),getOperateur.getIdOperateur());
+
+        operateurService.deleteOperateur(savedOperateur.getIdOperateur());
+    }
+
+
+    //Testing updateOperateur
+    @Test
+    public void testUpdateOperateur() {
+        Operateur o = new Operateur();
+        o.setNom("ines");
+        o.setPrenom("alioua");
+        o.setPassword("pass");
+        Operateur savedOperateur= operateurService.addOperateur(o);
+        savedOperateur.setNom("med");
+        operateurService.updateOperateur(savedOperateur);
+        assertEquals(o.getNom(),savedOperateur.getNom());
+        operateurService.deleteOperateur(savedOperateur.getIdOperateur());
+    }
+
+    //Testing deleteOperateur
+    @Test
+    public void testDeleteOperateur() {
+        Operateur o = new Operateur();
+        o.setNom("nc");
+        o.setPrenom("med");
+        o.setPassword("pass");
+        Operateur savedOperateur= operateurService.addOperateur(o);
+        operateurService.deleteOperateur(savedOperateur.getIdOperateur());
+        assertNotNull(savedOperateur.getIdOperateur());
+
+    }
+}
