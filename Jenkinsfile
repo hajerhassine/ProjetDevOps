@@ -25,6 +25,12 @@ pipeline {
             }
         }
 
+        stage('Nexus Deploy'){
+            steps{
+                sh 'mvn deploy -DskipTests'
+            }
+        }
+
         stage('MVN SONARQUBE'){
             steps {
                 sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=rania123'
@@ -47,11 +53,7 @@ pipeline {
             }
         }
 
-        stage('Nexus Deploy'){
-            steps{
-                sh 'mvn deploy -DskipTests'
-            }
-        }
+    
 
      
     
