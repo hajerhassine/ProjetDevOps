@@ -55,6 +55,7 @@ public class FournisseurServiceImplMock {
 	   // }
 	    @Test
 	    public void addFournisseurTest() {
+			
 	    	Fournisseur ss = new Fournisseur("libelle2", "20");
 	    when(fournisseurRepository.save(ss)).thenReturn(ss);
 	    assertEquals(ss, fournisseurServiceImpl.addFournisseur(ss));
