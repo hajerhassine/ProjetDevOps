@@ -10,7 +10,7 @@ services:
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql_2:3306/tpachato?autoReconnect=true&useSSL=false
 
-    image: "maisonhotetest"
+    image: "spring"
     depends_on:
       - mysql
       
