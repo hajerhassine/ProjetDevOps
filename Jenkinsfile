@@ -1,13 +1,47 @@
 pipeline {
+
+
     agent any
     stages{
         stage('Checkout GIT'){
          steps {
-             echo 'Pulling ...';
+              echo 'Pulling ...';
               git branch: 'hajer',
               url : 'https://github.com/hajerhassine/ProjetDevOps.git'
-         }    
+         } 
+
         }
+        stage('Building image docker-compose') {
+          steps {
+
+              sh "docker-compose up -d"
+          }
+        }
+
+         stage('Build image') {
+          steps {
+            sh "docker build -t hajerdockerhajer/imagedevops ."
+       		}
+       		}
+    		
+ 	   stage('Push image') {
+ 		steps {
+ 	       withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
+ 			
+        	 sh "docker push hajerdockerhajer/imagedevops"
+        	}
+        	}
+        	}
+         stage('Cleaning up') {
+ 		steps {
+ 	       withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
+ 			
+        	 sh "docker rmi -f hajerdockerhajer/imagedevops"
+        	}
+        	}
+        	}
+
+
         stage('Testing maven'){
             steps {
                 sh """mvn -version """
@@ -24,24 +58,27 @@ pipeline {
                 sh 'mvn compile'
             }
         }
-       
-          stage ('Test'){
+		stage('SonarQube analysis 1') {
+            steps {
+                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=test'
+            }
+        }
+        
+
+          stage('MVN Nexus'){
+            steps {
+                sh 'mvn redeploy'
+            } 
+            }         
+
+        stage ('Test'){
             steps {
                 echo 'Testing ...';
                 sh 'mvn test -Dtest="FournisseurServiceImplMock"'
             }
         }
-        stage('MVN SONARQUBE analysis 1'){
-            steps {
-                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=test'
-            }
-        }
-        stage('NEXUS') {
-            steps {
-                sh 'mvn deploy'
-                  
-                  }
-                       }
+
+
 
     }
 }
