@@ -9,12 +9,12 @@ pipeline {
          }    
         }
 
-        stage('Nexus Deploy'){
+        stage('Nexus Deploy '){
             steps{
                 sh 'mvn deploy -DskipTests'
             }
         }
-        
+
         stage('Testing maven'){
             steps {
                 sh """mvn -version """
@@ -39,6 +39,7 @@ pipeline {
                 sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=rania123'
             }
         }
+
 
          stage ('JUnit / Mockito Test'){
             steps{
