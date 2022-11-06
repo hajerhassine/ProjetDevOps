@@ -1,24 +1,34 @@
-/*package com.esprit.examen.services;
+package com.esprit.examen.services;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
-import org.junit.jupiter.api.Assertions;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import com.esprit.examen.entities.Operateur;
 import com.esprit.examen.repository.OperateurRepository;
 import com.esprit.examen.service.OperateurService;
 
-@SpringBootTest
+
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+
+
+
 @ExtendWith(MockitoExtension.class)
+
 public class OperateurServiceImplTest {
 
 	   @Mock
@@ -27,70 +37,48 @@ public class OperateurServiceImplTest {
 	    OperateurService operateurService;
 
 
-	    Operateur op = Operateur.builder().nom("yasmine").prenom("manita").password("root").build();
-	    List<Operateur> listOperateurs = new ArrayList<Operateur>(){
-	        {
-	            add(Operateur.builder().nom("Amina").prenom("Trifi").password("root").build());
-	            add(Operateur.builder().nom("Amine").prenom("Trifi").password("root").build());
-	            add(Operateur.builder().nom("Noura").prenom("Trifi").password("root").build());
-	            add(Operateur.builder().nom("Lassaad").prenom("Trifi").password("root").build());
 
-	        }
+    @Test
+    public void retrieveAllOperateur() {
+        when(operateurRepositoryMock.findAll()).thenReturn(Stream.of(
+                        new Operateur("yasmine", "manita", "pwd"),
+                        new Operateur("ines", "alioua", "kkk"),
+                        new Operateur("pwd", "fedi", "test"))
+                .collect(Collectors.toList()));
+        assertEquals(3,operateurService.retrieveAllOperateurs().size());
 
-	    };
+    }
 
-	    @Test
-	    void testretrieveOperateur(){
-	        Mockito.when(operateurRepositoryMock.findById(Mockito.anyLong())).thenReturn(Optional.of(op)); //find all
-	        Operateur op1 = operateurService.retrieveOperateur(2L);
-	        Assertions.assertNotNull(op1);
-
-	    }
-	    @Test
-	     void testaddOperateur() {
-	        Mockito.when(operateurRepositoryMock.save(op)).thenReturn(op);
-	        Operateur op1 = operateurService.addOperateur(op);
-	        Assertions.assertNotNull(op1);
-
-	    }
-
-	    @Test
-	     void testretrieveAllOperateurs() {
-	        Mockito.when(operateurRepositoryMock.findAll()).thenReturn(listOperateurs);
-	        List<Operateur> listOp = operateurService.retrieveAllOperateurs();
-	        Assertions.assertNotNull(listOp);
-	    }
+    @Test
+    public void addOperateurTest() {
+        Operateur ss = new Operateur("yasmine", "manita", "ccc");
+        when(operateurRepositoryMock.save(ss)).thenReturn(ss);
+        assertEquals(ss, operateurService.addOperateur(ss));
+    }
 
 
+    @Test
+    public void deleteOperateurTest() {
+        Operateur ss = new Operateur("yasmine", "manita", "ccc");
+        operateurService.deleteOperateur((long) 1);
+        verify(operateurRepositoryMock).deleteById((long) 1);
 
-	    @Test
-	     void tesupdateOperateur() {
-	        op.setPrenom("Hamdi");
-	        Mockito.when(operateurRepositoryMock.save(op)).thenReturn(op);
-	        Operateur op1 = operateurService.updateOperateur(op);
-	        Assertions.assertEquals(op.getPrenom(),op1.getPrenom());
+    }
 
-	    }
+    @Test
+    public void updatetStockTest() {
+        Operateur ss = new Operateur("yasmine", "manita","ccc") ;
+        Mockito.when(operateurRepositoryMock.save(Mockito.any(Operateur.class))).thenReturn(ss);
+        ss.setNom("mohamed");
+        Operateur exisitingOp= operateurService.updateOperateur(ss) ;
 
-	    @Test
-	     void testdeleteOperateur() {
-	        Operateur op2 = Operateur.builder().nom("Miral").prenom("Trifi").password("root").build();
-	        operateurService.deleteOperateur(op2.getIdOperateur());
-	        Mockito.verify(operateurRepositoryMock).deleteById(op2.getIdOperateur());
+        assertNotNull(exisitingOp);
+        assertEquals("mohamed", ss.getNom());
+    }
 
-	    }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
 }
-
- */
