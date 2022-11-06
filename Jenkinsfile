@@ -16,23 +16,24 @@ pipeline {
           }
         }
 
-         stage('Build image') {
+
+        stage('Build image') {
           steps {
             sh "docker build -t raniamilouchi/imagedevops ."
        		}
        		}
     		
- 	   stage('Push image') {
- 		steps {
- 	       withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
+ 	    stage('Push image') {
+ 		  steps {
+ 	          withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
  			
-        	 sh "docker push raniamilouchi/imagedevops"
+        	   sh "docker push raniamilouchi/imagedevops"
         	}
         	}
         	}
-         stage('Cleaning up') {
- 		steps {
- 	       withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
+        stage('Cleaning up') {
+ 		  steps {
+ 	         withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
  			
         	 sh "docker rmi -f raniamilouchi/imagedevops"
         	}
