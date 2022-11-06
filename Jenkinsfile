@@ -10,14 +10,6 @@ pipeline {
         }
        
 
-
-        stage('Nexus'){
-            steps{
-                sh 'mvn deploy '
-            }
-        }
-
-
         stage('Testing maven'){
             steps {
                 sh """mvn -version """
@@ -51,6 +43,20 @@ pipeline {
                 }
             }
         }
+
+        stage('MVN SONARQUBE'){
+            steps {
+                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=rania123'
+            }
+        }
+
+        
+        stage('Nexus'){
+            steps{
+                sh 'mvn deploy '
+            }
+        }
+
 
       
 
