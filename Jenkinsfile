@@ -32,6 +32,23 @@ pipeline {
         	}
         	}
         	}
+	   stage('pull project') {
+ 		steps {
+ 			           	 withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
+ 			
+        	 sh "docker pull lassoued404/imagedevops"
+        	}
+        	}
+        	}
+        		stage('Run project') {
+ 			steps {
+ 			           	 withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
+ 			
+        	 sh "docker container run lassoued404/imagedevops /bin/sh"
+        	}
+        	}
+        	}
+
                  stage('Cleaning up') {
  		steps {
  	       withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
