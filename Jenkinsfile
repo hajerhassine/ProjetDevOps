@@ -58,12 +58,7 @@ pipeline {
                   
             }
         }
- 	    stage('Building image docker-compose') {
-           steps {
-
-              sh "docker-compose up -d"
-          }
-        }
+ 	 
     	stage('Build image') {
            	steps {
        		 sh "docker build -t doniakacem/devopsimagedocker ."
