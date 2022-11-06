@@ -20,7 +20,13 @@ pipeline {
               sh "docker-compose up -d"
           }
         }
-
+	  stage('Building our image') {
+	   steps {
+ 	    script {
+            dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          }
+          }
+          }
 
         stage('Testing maven'){
             steps {
