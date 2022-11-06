@@ -14,6 +14,14 @@ pipeline {
               sh "docker-compose up -d"
           }
         }
+	  stage('Deploy our image') {
+         steps {
+              withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
+              sh "docker tag uu_app lassoued404/uu_app:uu_app"
+              sh "docker push lassoued404/uu_app:uu_app"
+
+         }}
+     }
         stage('Testing maven'){
             steps {
                 sh """mvn -version """
