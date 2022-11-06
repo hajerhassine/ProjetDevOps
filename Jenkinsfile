@@ -32,7 +32,7 @@ pipeline {
         	}
         	}
         	}
-         stage('Build image') {
+         stage('Cleaning up') {
           steps {
             sh "docker rmi -f lassoued404/imagedevops ."
        		}
