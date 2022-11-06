@@ -1,5 +1,9 @@
 pipeline {
-
+	environment {
+	 registry = "lassoued404/https://github.com/hajerhassine/ProjetDevOps.git"
+	 registryCredential = 'dockerHub'
+       
+}
 
     agent any
     stages{
