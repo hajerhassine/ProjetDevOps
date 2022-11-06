@@ -24,6 +24,12 @@ pipeline {
                 sh 'mvn compile'
             }
         }
+        stage('Building image docker-compose') {
+          steps {
+
+              sh "docker-compose up -d"
+          }
+        }
 
         stage('JUnit and Mockito Test'){
             steps{
