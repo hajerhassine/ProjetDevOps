@@ -32,11 +32,19 @@ pipeline {
         	}
         	}
         	}
+        	stage('pull project') {
+ 			steps {
+ 			           	 withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
+ 			
+        	 sh "docker pull lassoued404/imagedevopse"
+        	}
+        	}
+        	}
 	   stage('Run project') {
  		steps {
  	        withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
  			
-        	   sh "docker container run it lassoued404/imagedevopse /bin/sh"
+        	   sh "docker container run -it lassoued404/imagedevopse /bin/sh"
         	}
         	}
         	}
