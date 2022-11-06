@@ -9,7 +9,7 @@ pipeline {
          }    
         }
 
-        }
+        
         stage('Testing maven'){
             steps {
                 sh """mvn -version """
@@ -47,6 +47,7 @@ pipeline {
         stage('MVN CLEAN'){
             steps {
                 sh 'mvn clean'
+            }
             }
 
     }
