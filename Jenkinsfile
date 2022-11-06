@@ -70,7 +70,7 @@ pipeline {
 
         stage('MVN Nexus'){
             steps {
-                sh 'mvn redeploy'
+                sh 'mvn deploy'
             } 
             }         
 
