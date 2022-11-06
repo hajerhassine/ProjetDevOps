@@ -26,7 +26,7 @@ pipeline {
            }
          stage('Build image') {
           steps {
-            sh "docker build -t fourat8/image ."
+            sh "docker build -t lassoued404/imagedevops ."
        		}
        		}
     		
@@ -34,7 +34,7 @@ pipeline {
  		steps {
  	       withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
  			
-        	 sh "docker push fourat8/image"
+        	 sh "docker push lassoued404/imagedevops"
         	}
         	}
         	}
