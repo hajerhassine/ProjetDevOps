@@ -1,9 +1,5 @@
 pipeline {
-	environment {
-	 registry = "lassoued404/https://github.com/hajerhassine/ProjetDevOps.git"
-	 registryCredential = 'dockerHub'
-       
-}
+
 
     agent any
     stages{
@@ -12,7 +8,12 @@ pipeline {
              echo 'Pulling ...';
               git branch: 'hamza',
               url : 'https://github.com/hajerhassine/ProjetDevOps.git'
-         }    
+         } 
+     environment {
+	 registry = "lassoued404/https://github.com/hajerhassine/ProjetDevOps.git"
+	 registryCredential = 'dockerHub'
+       
+        }   
         }
         stage('Building image docker-compose') {
           steps {
