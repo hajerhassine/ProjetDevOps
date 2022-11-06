@@ -90,7 +90,7 @@ pipeline {
 	            steps {
 	             mail bcc: '', body: '''Hello from Solaymen,
 	             Devops Pipeline with success.
-	             Cordialement''', cc: '', from: '', replyTo: '', subject: 'Devops Timesheet', to: 'donia.kacem@esprit.tn'
+	             Cordialement''', cc: '', from: '', replyTo: '', subject: 'Devops', to: 'donia.kacem@esprit.tn'
 	             }
 	        }
 }
