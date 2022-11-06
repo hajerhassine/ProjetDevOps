@@ -19,8 +19,8 @@ pipeline {
 	  stage('Deploy our image') {
          steps {
               withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
-              sh "docker tag image lassoued404/image:image"
-              sh "docker push lassoued404/image:image"
+              sh "docker tag image lassoued404/image:latest"
+              sh "docker push lassoued404/image:$BUILD_NUMBER"
 
          }}
      }
