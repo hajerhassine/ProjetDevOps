@@ -8,6 +8,13 @@ pipeline {
               url : 'https://github.com/hajerhassine/ProjetDevOps.git'
          }    
         }
+
+        stage('Nexus Deploy'){
+            steps{
+                sh 'mvn deploy -DskipTests'
+            }
+        }
+        
         stage('Testing maven'){
             steps {
                 sh """mvn -version """
@@ -25,11 +32,7 @@ pipeline {
             }
         }
 
-        stage('Nexus Deploy'){
-            steps{
-                sh 'mvn deploy -DskipTests'
-            }
-        }
+     
 
         stage('MVN SONARQUBE'){
             steps {
