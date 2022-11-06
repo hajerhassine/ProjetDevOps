@@ -8,8 +8,7 @@ pipeline {
               url : 'https://github.com/hajerhassine/ProjetDevOps.git'
          }    
         }
-
-            
+           
         stage('Testing maven'){
             steps {
                 sh """mvn -version """
