@@ -1,7 +1,7 @@
 pipeline {
     environment {
      registry = "lassoued404/image"
-     registryCredential = ‘dockerHub’
+     registryCredential = "dockerHub"
   }
 
     agent any
