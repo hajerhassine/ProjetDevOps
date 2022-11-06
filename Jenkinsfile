@@ -17,15 +17,11 @@ pipeline {
               sh "docker-compose up -d"
           }
         }
-     environment {
-	 registry = "lassoued404/https://github.com/hajerhassine/ProjetDevOps.git"
-	 registryCredential = 'dockerHub'
-       
-        }   
+
 	  stage('Building our image') {
 	   steps {
  	    script {
-            dockerImage = docker.build registry + ":$BUILD_NUMBER"
+            dockerImage = docker.build "lassoued404/https://github.com/hajerhassine/ProjetDevOps.git" + ":$BUILD_NUMBER"
           }
           }
           }
