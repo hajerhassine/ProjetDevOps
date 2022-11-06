@@ -27,12 +27,6 @@ pipeline {
             }
         }
 
-        stage('MVN SONARQUBE'){
-            steps {
-                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=rania1234'
-            }
-        }
-
         stage ('JUnit / Mockito Test'){
             steps{
                 script
