@@ -13,6 +13,7 @@ pipeline {
 
               sh "docker-compose up -d"
           }
+        }
         stage('Testing maven'){
             steps {
                 sh """mvn -version """
@@ -30,7 +31,6 @@ pipeline {
             }
         }
 
-        }
 
         stage('JUnit and Mockito Test'){
             steps{
