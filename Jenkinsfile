@@ -8,6 +8,14 @@ pipeline {
               url : 'https://github.com/hajerhassine/ProjetDevOps.git'
          }    
         }
+       
+
+
+        stage('Nexus'){
+            steps{
+                sh 'mvn deploy '
+            }
+        }
 
 
         stage('Testing maven'){
@@ -44,11 +52,7 @@ pipeline {
             }
         }
 
-        stage('Nexus'){
-            steps{
-                sh 'mvn deploy '
-            }
-        }
+      
 
 
     
