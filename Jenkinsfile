@@ -70,7 +70,7 @@ pipeline {
         stage ('JUnit / Mockito Test'){
             steps{
                 script
-                {
+                 {
                     if (isUnix())
                     {
                         sh 'mvn --batch-mode test'
@@ -79,7 +79,7 @@ pipeline {
                     {
                         bat 'mvn --batch-mode test'
                     }
-                }
+                 }
             }
         }
 
