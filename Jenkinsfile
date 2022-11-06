@@ -18,13 +18,13 @@ pipeline {
           }
         }
 
-         stage('Build image') {
+        stage('Build image') {
           steps {
             sh "docker build -t hajerdockerhajer/imagedevops ."
        		}
        		}
     		
- 	   stage('Push image') {
+ 	    stage('Push image') {
  		steps {
  	       withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
  			
@@ -32,7 +32,7 @@ pipeline {
         	}
         	}
         	}
-         stage('Cleaning up') {
+        stage('Cleaning up') {
  		steps {
  	       withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
  			
@@ -65,7 +65,7 @@ pipeline {
         }
         
 
-          stage('MVN Nexus'){
+        stage('MVN Nexus'){
             steps {
                 sh 'mvn redeploy'
             } 
