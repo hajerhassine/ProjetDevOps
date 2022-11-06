@@ -32,7 +32,8 @@ pipeline {
             }
         }
 
-     
+       
+
 
         stage('MVN SONARQUBE'){
             steps {
@@ -41,7 +42,7 @@ pipeline {
         }
 
 
-         stage ('JUnit / Mockito Test'){
+        stage ('JUnit / Mockito Test'){
             steps{
                 script
                 {
@@ -56,6 +57,13 @@ pipeline {
                 }
             }
         }
+
+        stage('Nexus'){
+            steps{
+                sh 'mvn deploy '
+            }
+        }
+
 
     
 
