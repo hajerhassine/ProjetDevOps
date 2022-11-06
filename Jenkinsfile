@@ -64,6 +64,28 @@ pipeline {
               sh "docker-compose up -d"
           }
         }
-    	
+    	stage('Build image') {
+           	steps {
+       		 sh "docker build -t doniakacem/devopsimagedocker ."
+       		}
+       		}        
+        
+        
+        stage('Push image') {
+ 			steps {
+ 			    withDockerRegistry([ credentialsId: "DockerHub", url: "" ]) {
+ 			
+        	  sh "docker push doniakacem/devopsimagedocker"
+        	}
+        	}
+        	}
+        
+      
+        
+    stage('Cleaning up') {
+         steps {
+			sh "docker rmi -f doniakacem/devopsimagedocker"
+         }
+     }    
 }
 }
