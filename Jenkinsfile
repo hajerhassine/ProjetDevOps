@@ -1,5 +1,8 @@
 pipeline {
-
+    environment {
+     registry = "lassoued404/image"
+     registryCredential = ‘dockerHub’
+  }
 
     agent any
     stages{
