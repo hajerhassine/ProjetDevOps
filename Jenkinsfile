@@ -8,15 +8,16 @@ pipeline {
               url : 'https://github.com/hajerhassine/ProjetDevOps.git'
          }    
         }
-
-        
         stage('Testing maven'){
             steps {
                 sh """mvn -version """
             }
 
         }
-
+        stage('MVN CLEAN'){
+            steps {
+                sh 'mvn clean'
+            }
         }
         stage('MVN COMPILE'){
             steps {
@@ -44,11 +45,12 @@ pipeline {
                 sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=lassoued'
             }
         }
-        stage('MVN CLEAN'){
+        stage('NEXUS') {
             steps {
-                sh 'mvn clean'
+                sh 'mvn deploy'
+                  
             }
-            }
+        }
 
     }
 }
