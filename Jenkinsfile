@@ -20,11 +20,7 @@ pipeline {
               sh "docker-compose up -d"
           }
         }
-	  stage('Deploy our image') {
-         steps {
-              withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) 
-	     }
-        }
+
 
         stage('Testing maven'){
             steps {
