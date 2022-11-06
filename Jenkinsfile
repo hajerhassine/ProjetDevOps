@@ -32,7 +32,11 @@ pipeline {
         	}
         	}
         	}
-
+         stage('Build image') {
+          steps {
+            sh "docker rmi -f lassoued404/imagedevops ."
+       		}
+       		}
 
 
         stage('Testing maven'){
