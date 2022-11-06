@@ -33,10 +33,13 @@ pipeline {
         	}
         	}
          stage('Cleaning up') {
-          steps {
-            sh "docker rmi -f lassoued404/imagedevops ."
-       		}
-       		}
+ 		steps {
+ 	       withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
+ 			
+        	 sh "docker rmi -f lassoued404/imagedevops"
+        	}
+        	}
+        	}
 
 
         stage('Testing maven'){
