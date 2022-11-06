@@ -11,6 +11,7 @@ pipeline {
          } 
 
         }
+        
         stage('Building image docker-compose') {
           steps {
 
