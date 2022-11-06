@@ -36,7 +36,7 @@ pipeline {
  			steps {
  			           	 withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
  			
-        	 sh "docker pull lassoued404/imagedevopse"
+        	 sh "docker pull lassoued404/imagedevops"
         	}
         	}
         	}
@@ -44,7 +44,7 @@ pipeline {
  		steps {
  	        withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
  			
-        	   sh "docker container run -it lassoued404/imagedevopse /bin/sh"
+        	   sh "docker container run -it lassoued404/imagedevops /bin/sh"
         	}
         	}
         	}
