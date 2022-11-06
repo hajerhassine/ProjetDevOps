@@ -25,24 +25,26 @@ pipeline {
             }
         }
        
-             stage ('Test'){
-            steps {
-                echo 'Testing ...';
-                sh 'mvn test -Dtest="FournisseurServiceImplMock"'
+            stage('JUnit and Mockito Test'){
+            steps{
+                script
+                {
+                    if (isUnix())
+                    {
+                        sh 'mvn --batch-mode test'
+                    }
+                    else
+                    {
+                        bat 'mvn --batch-mode test'
+                    }
+                }
             }
         }
-        
-            stage('SonarQube analysis 1') {
+        stage('MVN SONARQUBE analysis 1'){
             steps {
                 sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=test'
             }
         }
-       
-    }
-    
 
-       
-       
-   
-    
+    }
 }

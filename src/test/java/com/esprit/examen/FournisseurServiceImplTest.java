@@ -14,8 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.esprit.examen.entities.Fournisseur;
 import com.esprit.examen.services.FournisseurServiceImpl;
 
-
-@SpringBootTest
+@SpringBootTest(classes=FournisseurServiceImplTest.class)
 public class FournisseurServiceImplTest {
 	
 
