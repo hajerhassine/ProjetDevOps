@@ -28,7 +28,7 @@ pipeline {
           stage ('Test'){
             steps {
                 echo 'Testing ...';
-                sh 'mvn test -Dtest="FournisseurServiceImplTest"'
+                sh 'mvn test -Dtest="FournisseurServiceImplMock"'
             }
         }
         stage('MVN SONARQUBE analysis 1'){
