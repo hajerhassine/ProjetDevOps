@@ -1,5 +1,9 @@
 pipeline {
-
+    environment {
+	registry = "lassoued404/imagedevops"
+	registryCredential = 'dockerHub'
+	dockerImage = 'imagedevops'
+	}
 
     agent any
     stages{
@@ -17,6 +21,13 @@ pipeline {
               sh "docker-compose up -d"
           }
         }
+	  stage('Building our image') {
+	   steps {
+          script {
+           dockerImage = docker.build registry + ":$BUILD_NUMBER"
+	     }
+           }
+           }
 
 
 
