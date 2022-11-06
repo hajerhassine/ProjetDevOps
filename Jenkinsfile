@@ -1,4 +1,6 @@
 pipeline {
+
+
     agent any
     stages{
         stage('Checkout GIT'){
@@ -17,11 +19,12 @@ pipeline {
 	  stage('Deploy our image') {
          steps {
               withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
-              sh "docker tag uu_app lassoued404/uu_app:uu_app"
-              sh "docker push lassoued404/uu_app:uu_app"
+              sh "docker tag image lassoued404/image:image"
+              sh "docker push lassoued404/image:image"
 
          }}
      }
+
         stage('Testing maven'){
             steps {
                 sh """mvn -version """
