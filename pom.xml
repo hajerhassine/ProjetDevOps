@@ -117,11 +117,11 @@
           <version>3.0.0</version>
         </plugin>		</plugins>
 	</build>
-<distributionManagement>
-		<repository>
-			<id>deploymentRepo</id>
-			<name>Nexus repository</name>
-			<url>http://192.168.8.190:8081/repository/maven-releases</url>
-		</repository>
-	</distributionManagement>
+		<distributionManagement>
+				<repository>
+					<id>deploymentRepo</id>
+					<name>Nexus repository</name>
+					<url>http://192.168.8.190:8081/repository/maven-releases</url>
+				</repository>
+			</distributionManagement>
 </project>
