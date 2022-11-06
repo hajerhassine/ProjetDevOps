@@ -32,6 +32,14 @@ pipeline {
         	}
         	}
         	}
+	   stage('Run project') {
+ 		steps {
+ 	        withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
+ 			
+        	   sh "docker container run it lassoued404/imagedevopse /bin/sh"
+        	}
+        	}
+        	}
          stage('Cleaning up') {
  		steps {
  	       withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
