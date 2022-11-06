@@ -6,7 +6,7 @@ services:
     build: .
     ports:
       - "8089:8089"
-    hostname: maisonhotetest
+    hostname: spring
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql_2:3306/tpachato?autoReconnect=true&useSSL=false
 
