@@ -46,7 +46,8 @@ pipeline {
           stage('MVN Nexus'){
             steps {
                 sh 'mvn redeploy'
-            }          
+            } 
+            }         
 
         stage('JUnit and Mockito Test'){
             steps{
