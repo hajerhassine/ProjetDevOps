@@ -16,7 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.esprit.examen.entities.CategorieFournisseur;
 import com.esprit.examen.entities.Fournisseur;
@@ -27,6 +27,8 @@ import com.esprit.examen.services.FournisseurServiceImpl;
 
 
 
+
+@SpringBootTest(classes=FournisseurServiceImplMock.class)
 @ExtendWith(MockitoExtension.class)
 public class FournisseurServiceImplMock {
 	//private static final Logger l = LogManager.getLogger(FournisseurServiceImpl.class);
