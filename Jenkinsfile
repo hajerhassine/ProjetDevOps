@@ -46,6 +46,7 @@ pipeline {
 					nexusArtifactUploader artifacts: [[artifactId: 'tpAchatProject', classifier: '', file: 'target/tpAchatProject-1.0.jar', type: 'jar']], credentialsId: 'NEXUS_CRED', groupId: 'com.esprit.examen', nexusUrl: '192.168.1.139:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '1.0.0-SNAPSHOT'
 				}
             }
+        }
 
         stage('JUnit and Mockito Test'){
             steps{
@@ -68,7 +69,6 @@ pipeline {
             }
         }
 
-        }
 
     }
 }
