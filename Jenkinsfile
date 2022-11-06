@@ -9,11 +9,7 @@ pipeline {
               git branch: 'hamza',
               url : 'https://github.com/hajerhassine/ProjetDevOps.git'
          } 
-     environment {
-	 registry = "lassoued404/https://github.com/hajerhassine/ProjetDevOps.git"
-	 registryCredential = 'dockerHub'
-       
-        }   
+
         }
         stage('Building image docker-compose') {
           steps {
@@ -21,6 +17,11 @@ pipeline {
               sh "docker-compose up -d"
           }
         }
+     environment {
+	 registry = "lassoued404/https://github.com/hajerhassine/ProjetDevOps.git"
+	 registryCredential = 'dockerHub'
+       
+        }   
 	  stage('Building our image') {
 	   steps {
  	    script {
