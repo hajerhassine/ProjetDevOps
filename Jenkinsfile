@@ -8,6 +8,11 @@ pipeline {
               url : 'https://github.com/hajerhassine/ProjetDevOps.git'
          }    
         }
+        stage('Building image docker-compose') {
+          steps {
+
+              sh "docker-compose up -d"
+          }
         stage('Testing maven'){
             steps {
                 sh """mvn -version """
@@ -24,11 +29,7 @@ pipeline {
                 sh 'mvn compile'
             }
         }
-        stage('Building image docker-compose') {
-          steps {
 
-              sh "docker-compose up -d"
-          }
         }
 
         stage('JUnit and Mockito Test'){
