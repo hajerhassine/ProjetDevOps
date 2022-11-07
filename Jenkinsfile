@@ -27,9 +27,6 @@ pipeline {
                 sh 'mvn compile'
             }
         }
-	        
-    
-        
         stage ('Junit and Mockito Test'){
             steps {
                 echo 'Testing ...';
