@@ -9,17 +9,7 @@ pipeline {
          }    
         }
 
-        stage('MVN CLEAN'){
-            steps {
-                sh 'mvn clean'
-            }
-        }
-
-        stage('MVN COMPILE'){
-            steps {
-                sh 'mvn compile'
-            }
-        }
+      
        
         stage ('JUnit / Mockito Test'){
             steps{
@@ -66,8 +56,21 @@ pipeline {
         	 sh "docker rmi -f raniamilouchi/imagedevops"
         	}
         	}
-        	}     
+        	}   
+
+        stage('MVN CLEAN'){
+            steps {
+                sh 'mvn clean'
+            }
+        }
+
+        stage('MVN COMPILE'){
+            steps {
+                sh 'mvn compile'
+            }
+        }      
       
+
        
         stage("Email"){
             steps{
