@@ -41,7 +41,7 @@ pipeline {
         
         stage('Build image') {
           steps {
-            sh "docker build -t raniamilouchi/imagedevops ."
+            sh "docker build -t raniamilouchiDocker/imagedevops ."
        		}
        		}
     		
