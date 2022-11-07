@@ -89,16 +89,11 @@ pipeline {
             }
         }
 
-        stage('Ok') {
-            steps {
-                echo "Ok"
-            }
-        }
-    }
-            post {
-             always {
-                emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
-        }
+	 stage("Email"){
+            steps{
+               emailext attachLog: true, body: "the result is :  ${currentBuild.result}", compressLog: true, subject: "Status of pipeline: ${currentBuild.fullDisplayName}", to: 'hamza.lassoued@esprit.tn'
+           }
+       } 
 
     }
 }
