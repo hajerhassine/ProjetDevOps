@@ -41,7 +41,7 @@ pipeline {
         
         stage('Build image') {
           steps {
-            sh "docker build -t raniamilouchiDocker/imagedevops ."
+            sh "docker build -t dockerraniamilouchi/imagedevops ."
        		}
        		}
     		
@@ -49,7 +49,7 @@ pipeline {
  		  steps {
  	          withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
  			
-        	   sh "docker push raniamilouchiDocker/imagedevops"
+        	   sh "docker push dockerraniamilouchi/imagedevops"
         	}
         	}
         	}
@@ -57,7 +57,7 @@ pipeline {
  		  steps {
  	         withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
  			
-        	 sh "docker rmi -f raniamilouchiDocker/imagedevops"
+        	 sh "docker rmi -f dockerraniamilouchi/imagedevops"
         	}
         	}
         	}   
