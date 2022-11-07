@@ -11,37 +11,7 @@ pipeline {
          } 
 
         }
-        stage('Building image docker-compose') {
-          steps {
 
-              sh "docker-compose up -d"
-          }
-        }
-
-         stage('Build image') {
-          steps {
-            sh "docker build -t lassoued404/imagedevops ."
-       		}
-       		}
-    		
- 	   stage('Push image') {
- 		steps {
- 	       withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
- 			
-        	 sh "docker push lassoued404/imagedevops"
-        	}
-        	}
-        	}
-
-
-                 stage('Cleaning up') {
- 		steps {
- 	       withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
- 			
-        	 sh "docker rmi -f lassoued404/imagedevops"
-        	}
-        	}
-        	}
 
 
         stage('Testing maven'){
@@ -86,7 +56,37 @@ pipeline {
                 sh 'mvn deploy'
             } 
             }         
+        stage('Building image docker-compose') {
+          steps {
 
+              sh "docker-compose up -d"
+          }
+        }
+
+         stage('Build image') {
+          steps {
+            sh "docker build -t lassoued404/imagedevops ."
+       		}
+       		}
+    		
+ 	   stage('Push image') {
+ 		steps {
+ 	       withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
+ 			
+        	 sh "docker push lassoued404/imagedevops"
+        	}
+        	}
+        	}
+
+
+                 stage('Cleaning up') {
+ 		steps {
+ 	       withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
+ 			
+        	 sh "docker rmi -f lassoued404/imagedevops"
+        	}
+        	}
+        	}
 
 
 	 stage("Email"){
