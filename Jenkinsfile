@@ -9,16 +9,12 @@ pipeline {
          }    
         }
 
-
-
         stage('Building image docker-compose') {
           steps {
 
               sh "docker-compose up -d"
           }
         }
-
-
         stage('Build image') {
           steps {
             sh "docker build -t raniamilouchi/imagedevops ."
@@ -41,32 +37,24 @@ pipeline {
         	}
         	}
         	}
+   
            
-        stage('Testing maven'){
-            steps {
-                sh """mvn -version """
-            }
-
-        }
         stage('MVN CLEAN'){
             steps {
                 sh 'mvn clean'
             }
         }
+
         stage('MVN COMPILE'){
             steps {
                 sh 'mvn compile'
             }
         }
-
-        stage('MVN SONARQUBE anaylis'){
+          stage('MVN SONARQUBE anaylis'){
             steps {
                 sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=rania1234'
             }
         }
-
-
-
 
         stage ('JUnit / Mockito Test'){
             steps{
@@ -82,7 +70,8 @@ pipeline {
                     }
                  }
             }
-        }
+        } 
+         
 
         stage('Nexus'){
             steps{
