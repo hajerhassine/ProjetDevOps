@@ -8,6 +8,18 @@ pipeline {
               url : 'https://github.com/hajerhassine/ProjetDevOps.git'
          }    
         }
+
+        stage('MVN CLEAN'){
+            steps {
+                sh 'mvn clean'
+            }
+        }
+
+        stage('MVN COMPILE'){
+            steps {
+                sh 'mvn compile'
+            }
+        }
        
         stage ('JUnit / Mockito Test'){
             steps{
@@ -55,17 +67,7 @@ pipeline {
         	}
         	}
         	}     
-        stage('MVN CLEAN'){
-            steps {
-                sh 'mvn clean'
-            }
-        }
-
-        stage('MVN COMPILE'){
-            steps {
-                sh 'mvn compile'
-            }
-        }
+      
        
         stage("Email"){
             steps{
