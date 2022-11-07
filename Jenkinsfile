@@ -86,12 +86,6 @@ pipeline {
 			sh "docker rmi -f doniakacem/devopsimagedocker"
          }
      }    
-	stage('Sending email'){
-	            steps {
-	             mail bcc: '', body: '''Hello from Donia,
-	             Devops Pipeline with success.
-	             Cordialement''', cc: '', from: '', replyTo: '', subject: 'Devops', to: 'mohamedaziz.maamar@esprit.tn'
-	             }
-	        }
+
 }
 }
