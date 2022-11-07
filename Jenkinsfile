@@ -9,9 +9,11 @@ pipeline {
          }    
         }
 
-           stage('MVN SONARQUBE anaylis'){
-            steps {
-                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=rania1234'
+
+        
+        stage('Nexus'){
+            steps{
+                sh 'mvn deploy '
             }
         }
 
@@ -31,13 +33,7 @@ pipeline {
             }
         } 
          
-
-
-        stage('Nexus'){
-            steps{
-                sh 'mvn deploy '
-            }
-        }
+      
 
         stage('Building image docker-compose') {
           steps {
