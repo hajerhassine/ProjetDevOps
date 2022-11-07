@@ -11,6 +11,29 @@ pipeline {
          } 
 
         }
+        stage('Building image docker-compose') {
+          steps {
+
+              sh "docker-compose up -d"
+          }
+        }
+
+
+
+        stage('Build image') {
+          steps {
+            sh "docker build -t hajerdockerhajer/imagedevops ."
+       		}
+       		}
+    		
+ 	    stage('Push image') {
+ 		steps {
+ 	       withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
+ 			
+        	 sh "docker push hajerdockerhajer/imagedevops"
+        	}
+        	}
+        	}
           stage('Testing maven'){
             steps {
                 sh """mvn -version """
@@ -33,28 +56,7 @@ pipeline {
                 sh 'mvn test -Dtest="FournisseurServiceImplMock"'
             }
         }
-        stage('Building image docker-compose') {
-          steps {
-
-              sh "docker-compose up -d"
-          }
-        }
-
-
-        stage('Build image') {
-          steps {
-            sh "docker build -t hajerdockerhajer/imagedevops ."
-       		}
-       		}
-    		
- 	    stage('Push image') {
- 		steps {
- 	       withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
- 			
-        	 sh "docker push hajerdockerhajer/imagedevops"
-        	}
-        	}
-        	}
+        
         stage('Cleaning up') {
  		steps {
  	       withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
