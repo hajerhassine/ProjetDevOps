@@ -9,6 +9,35 @@ pipeline {
          }    
         }
 
+           stage('MVN SONARQUBE anaylis'){
+            steps {
+                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=rania1234'
+            }
+        }
+
+        stage ('JUnit / Mockito Test'){
+            steps{
+                script
+                 {
+                    if (isUnix())
+                    {
+                        sh 'mvn --batch-mode test'
+                    }
+                    else
+                    {
+                        bat 'mvn --batch-mode test'
+                    }
+                 }
+            }
+        } 
+         
+
+        stage('Nexus'){
+            steps{
+                sh 'mvn deploy '
+            }
+        }
+
         stage('Building image docker-compose') {
           steps {
 
@@ -50,34 +79,7 @@ pipeline {
                 sh 'mvn compile'
             }
         }
-          stage('MVN SONARQUBE anaylis'){
-            steps {
-                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=rania1234'
-            }
-        }
-
-        stage ('JUnit / Mockito Test'){
-            steps{
-                script
-                 {
-                    if (isUnix())
-                    {
-                        sh 'mvn --batch-mode test'
-                    }
-                    else
-                    {
-                        bat 'mvn --batch-mode test'
-                    }
-                 }
-            }
-        } 
-         
-
-        stage('Nexus'){
-            steps{
-                sh 'mvn deploy '
-            }
-        }
+       
 
       
 
