@@ -11,15 +11,34 @@ pipeline {
          } 
 
         }
-        stage('Building image docker-compose') {
+             stage('MVN CLEAN'){
+            steps {
+                sh 'mvn clean'
+            }
+        }
+        stage('MVN COMPILE'){
+            steps {
+                sh 'mvn compile'
+            }
+        }
+     
+        stage('SonarQube analysis 1') {
+            steps {
+                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=test'
+            }
+        }
+           stage('MVN Nexus'){
+            steps {
+                sh 'mvn deploy'
+            } 
+            } 
+	
+   stage('Building image docker-compose') {
           steps {
 
               sh "docker-compose up -d"
           }
         }
-
-
-
         stage('Build image') {
           steps {
             sh "docker build -t hajerdockerhajer/imagedevops ."
@@ -34,22 +53,8 @@ pipeline {
         	}
         	}
         	}
-          stage('Testing maven'){
-            steps {
-                sh """mvn -version """
-            }
-
-        }
-           stage('MVN CLEAN'){
-            steps {
-                sh 'mvn clean'
-            }
-        }
-        stage('MVN COMPILE'){
-            steps {
-                sh 'mvn compile'
-            }
-        }
+       
+      
         stage ('Junit and Mockito Test'){
             steps {
                 echo 'Testing ...';
@@ -68,16 +73,7 @@ pipeline {
      
         
 
-        stage('MVN Nexus'){
-            steps {
-                sh 'mvn deploy'
-            } 
-            } 
-	stage('SonarQube analysis 1') {
-            steps {
-                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=test'
-            }
-        }
+     
 
 
     }
