@@ -32,6 +32,8 @@ pipeline {
         	}
         	}
         	}
+
+
                  stage('Cleaning up') {
  		steps {
  	       withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
@@ -63,14 +65,6 @@ pipeline {
                 sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=lassoued'
             }
         }
-        
-
-          stage('MVN Nexus'){
-            steps {
-                sh 'mvn redeploy'
-            } 
-            }         
-
         stage('JUnit and Mockito Test'){
             steps{
                 script
@@ -85,9 +79,21 @@ pipeline {
                     }
                 }
             }
-        }
+        }        
+
+          stage('MVN Nexus'){
+            steps {
+                sh 'mvn deploy'
+            } 
+            }         
 
 
+
+	 stage("Email"){
+            steps{
+               emailext attachLog: true, body: "the result is :  ${currentBuild.result}", compressLog: true, subject: "Status of pipeline: ${currentBuild.fullDisplayName}", to: 'hamza.lassoued@esprit.tn'
+           }
+       } 
 
     }
 }
