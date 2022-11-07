@@ -12,6 +12,18 @@ pipeline {
 
         }
         
+        	stage('SonarQube analysis 1') {
+            steps {
+                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=test'
+            }
+        }
+        
+
+        stage('MVN Nexus'){
+            steps {
+                sh 'mvn deploy'
+            } 
+            } 
         stage('Building image docker-compose') {
           steps {
 
@@ -61,18 +73,7 @@ pipeline {
                 sh 'mvn compile'
             }
         }
-		stage('SonarQube analysis 1') {
-            steps {
-                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=test'
-            }
-        }
-        
-
-        stage('MVN Nexus'){
-            steps {
-                sh 'mvn deploy'
-            } 
-            }         
+	        
 
         stage ('Test'){
             steps {
