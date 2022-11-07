@@ -32,8 +32,6 @@ pipeline {
         	}
         	}
         	}
-
-
                  stage('Cleaning up') {
  		steps {
  	       withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
@@ -69,7 +67,7 @@ pipeline {
 
           stage('MVN Nexus'){
             steps {
-                sh 'mvn deploy'
+                sh 'mvn redeploy'
             } 
             }         
 
@@ -89,11 +87,7 @@ pipeline {
             }
         }
 
-	 stage("Email"){
-            steps{
-               emailext attachLog: true, body: "the result is :  ${currentBuild.result}", compressLog: true, subject: "Status of pipeline: ${currentBuild.fullDisplayName}", to: 'hamza.lassoued@esprit.tn'
-           }
-       } 
+
 
     }
 }
