@@ -32,6 +32,7 @@ pipeline {
         } 
          
 
+
         stage('Nexus'){
             steps{
                 sh 'mvn deploy '
@@ -65,9 +66,7 @@ pipeline {
         	 sh "docker rmi -f raniamilouchi/imagedevops"
         	}
         	}
-        	}
-   
-           
+        	}     
         stage('MVN CLEAN'){
             steps {
                 sh 'mvn clean'
