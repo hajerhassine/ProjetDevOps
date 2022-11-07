@@ -28,11 +28,7 @@ pipeline {
             }
         }
 	        
-        	stage('SonarQube analysis 1') {
-            steps {
-                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=test'
-            }
-        }
+    
         
         stage ('Junit and Mockito Test'){
             steps {
@@ -78,7 +74,11 @@ pipeline {
                 sh 'mvn deploy'
             } 
             } 
-
+	stage('SonarQube analysis 1') {
+            steps {
+                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=test'
+            }
+        }
 
 
     }
