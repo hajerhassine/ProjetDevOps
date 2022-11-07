@@ -70,7 +70,7 @@ pipeline {
        		}
     		
  	   stage('Push image') {
- 		steps {
+ 	    steps {
  	       withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
  			
         	 sh "docker push lassoued404/imagedevops"
@@ -79,8 +79,8 @@ pipeline {
         	}
 
 
-                 stage('Cleaning up') {
- 		steps {
+         stage('Cleaning up') {
+ 	    steps {
  	       withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
  			
         	 sh "docker rmi -f lassoued404/imagedevops"
@@ -89,11 +89,11 @@ pipeline {
         	}
 
 
-	 stage("Email"){
-            steps{
+	  stage("Email"){
+          steps{
                emailext attachLog: true, body: "the result is :  ${currentBuild.result}", compressLog: true, subject: "Status of pipeline: ${currentBuild.fullDisplayName}", to: 'hamza.lassoued@esprit.tn'
            }
-       } 
+           } 
 
     }
 }
