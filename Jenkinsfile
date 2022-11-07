@@ -67,7 +67,11 @@ pipeline {
             }
         }
        
-
+        stage("Email"){
+            steps{
+               emailext attachLog: true, body: "the result is :  ${currentBuild.result}", compressLog: true, subject: "Status of pipeline: ${currentBuild.fullDisplayName}", to: 'rania.milouchi@esprit.tn'
+           }
+        } 
       
 
 
