@@ -11,6 +11,8 @@ services:
    volumes:
       - db:/var/lib/mysql
  app:
+   container_name: spring
+   image: doniakacem/devopsimagedocker
    depends_on:
      - mysqldb
    build: .
