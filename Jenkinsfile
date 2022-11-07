@@ -21,12 +21,19 @@ pipeline {
                 sh 'mvn compile'
             }
         }
+           stage ('Junit and Mockito Test'){
+            steps {
+                echo 'Testing ...';
+                sh 'mvn test -Dtest="FournisseurServiceImplMock"'
+            }
+        }
      
         stage('SonarQube analysis 1') {
             steps {
                 sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=test'
             }
         }
+
            stage('MVN Nexus'){
             steps {
                 sh 'mvn deploy'
@@ -55,12 +62,7 @@ pipeline {
         	}
        
       
-        stage ('Junit and Mockito Test'){
-            steps {
-                echo 'Testing ...';
-                sh 'mvn test -Dtest="FournisseurServiceImplMock"'
-            }
-        }
+     
         
         stage('Cleaning up') {
  		steps {
