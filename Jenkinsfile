@@ -9,12 +9,6 @@ pipeline {
          }    
         }
        
-        stage('Nexus'){
-            steps{
-                sh 'mvn deploy '
-            }
-        }
-
         stage ('JUnit / Mockito Test'){
             steps{
                 script
