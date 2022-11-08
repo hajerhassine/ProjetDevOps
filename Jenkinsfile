@@ -9,8 +9,33 @@ pipeline {
          }    
         }
 
-      
-       
+        stage('MVN CLEAN'){
+            steps {
+                sh 'mvn clean'
+            }
+        }
+
+        stage('MVN COMPILE'){
+            steps {
+                sh 'mvn compile'
+            }
+        }  
+        
+
+        stage('SonarQube analysis 1') {
+            steps {
+                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=rania123'
+            }
+        }
+
+
+
+        stage('MVN Nexus'){
+            steps {
+                sh 'mvn deploy'
+            } 
+            }
+     
         stage ('JUnit / Mockito Test'){
             steps{
                 script
@@ -26,8 +51,7 @@ pipeline {
                  }
             }
         } 
-         
-      
+
 
 
         stage('Building image docker-compose') {
@@ -61,20 +85,7 @@ pipeline {
         	}
         	}
         	}   
-
-        stage('MVN CLEAN'){
-            steps {
-                sh 'mvn clean'
-            }
-        }
-
-        stage('MVN COMPILE'){
-            steps {
-                sh 'mvn compile'
-            }
-        }      
-      
-
+    
        
         stage("Email"){
             steps{
