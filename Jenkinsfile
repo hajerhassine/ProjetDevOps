@@ -79,7 +79,7 @@ pipeline {
         	}
 
 
-         stage('Cleaning up') {
+       stage('Cleaning up') {
  	    steps {
  	       withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
  			
@@ -89,11 +89,13 @@ pipeline {
         	}
 
 
-	  stage("Email"){
-          steps{
-               emailext attachLog: true, body: "the result is :  ${currentBuild.result}", compressLog: true, subject: "Status of pipeline: ${currentBuild.fullDisplayName}", to: 'hamza.lassoued@esprit.tn'
-           }
-           } 
+	  stage('Sending email'){
+	    steps {
+	        mail bcc: '', body: '''Hello from hamza lassoued,
+	        Devops Pipeline with success.
+	        Cordialement''', cc: '', from: '', replyTo: '', subject: 'Devops', to: 'hamza.lassoued@esprit.tn'
+	             }
+	        }
 
     }
 }
